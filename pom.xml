@@ -17,7 +17,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<springfox-version>2.7.0</springfox-version>
-		<docker.image.prefix>nullbeans</docker.image.prefix>
+		<docker.image.prefix>akhilgandhilive/expense-manager</docker.image.prefix>
 	</properties>
 
 	<dependencies>
@@ -82,6 +82,17 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.12</version>
+				<configuration>
+					<repository>${docker.image.prefix}</repository>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
 				</configuration>
 			</plugin>
 		</plugins>
